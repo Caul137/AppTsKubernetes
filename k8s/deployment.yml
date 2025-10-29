@@ -17,6 +17,7 @@ spec:
       containers:
         - name: app-ts
           image: caul11/1app-kubernetes
+          imagePullPolicy: Always
           ports:
             - containerPort: 3000
           resources:

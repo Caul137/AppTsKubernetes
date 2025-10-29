@@ -9,4 +9,10 @@ export class AppController {
   getHello(): string {
     return this.appService.getHello();
   }
+
+  @Get('/k8s')
+  getK8s(): string {
+    return this.appService.getK8s();
+  }
+
 }

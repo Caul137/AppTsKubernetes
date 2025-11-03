@@ -6,6 +6,11 @@ metadata:
 
 spec:
   replicas: 2
+  strategy:
+    type: RollingUpdate
+    rollingUpdate:
+      maxSurge: 1
+      maxUnavailable: 1
   selector:
     matchLabels:
       api: app-ts
@@ -16,8 +21,24 @@ spec:
     spec:
       containers:
         - name: app-ts
-          image: caul11/1app-kubernetes
-          imagePullPolicy: Always
+          image: caul11/1app-kubernetes:v4
+          imagePullPolicy: IfNotPresent
+          envFrom:
+            - configMapRef:
+                name: app-ts
+            - secretRef:
+                name: app-ts-secrets
+          # env:
+          #   - name: APP
+          #     valueFrom:
+          #       configMapKeyRef:
+          #         name: app-ts
+          #         key: app-name
+          #   - name: API_KEY
+          #     valueFrom:
+          #       secretKeyRef:
+          #         name: app-ts-secrets
+          #         key: api-key
           ports:
             - containerPort: 3000
           resources:

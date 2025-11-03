@@ -21,7 +21,7 @@ spec:
     spec:
       containers:
         - name: app-ts
-          image: caul11/1app-kubernetes:v4
+          image: caul11/1app-kubernetes:v5
           imagePullPolicy: IfNotPresent
           envFrom:
             - configMapRef:

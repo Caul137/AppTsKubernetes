@@ -49,7 +49,7 @@ spec:
             successThreshold: 1
             timeoutSeconds: 1
             periodSeconds: 10
-            initialDelayseconds: 10
+            initialDelaySeconds: 10
           readinessProbe:
             httpGet:
               path: /readyz
@@ -58,16 +58,16 @@ spec:
             successThreshold: 1
             timeoutSeconds: 1
             periodSeconds: 15
-            initialDelayseconds: 10
+            initialDelaySeconds: 10
           livenessProbe:
             httpGet:
               path: /healthz
               port: 3000
             failureThreshold: 5
-            successThreshold: 3
+            successThreshold: 1
             timeoutSeconds: 1
             periodSeconds: 10
-            initialDelayseconds: 10
+            initialDelaySeconds: 10
           resources:
             requests:
               cpu: 90m
@@ -75,3 +75,10 @@ spec:
             limits:
               cpu: 110M
               memory: 120Mi
+          volumeMounts:
+            - name: app-ts-data
+              mountPath: /usr/src/app/uploads
+      volumes:
+        - name: app-ts-data
+          persistentVolumeClaim:
+            claimName: first-pvc
